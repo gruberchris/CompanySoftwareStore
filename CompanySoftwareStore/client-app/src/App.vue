@@ -11,7 +11,6 @@
 <script>
   import axios from 'axios';
   import cmp from 'semver-compare';
-  import config from './config.json';
   import SearchInput from './components/SearchInput';
   import SearchResultsPanel from './components/SearchResultsPanel';
 
@@ -32,7 +31,9 @@
       onSearchSubmit(query) {
         this.searchQuery = query;
 
-        axios.get(config.companyStoreApiUrl)
+        const companyStoreSoftwareApiUrl = process.env.VUE_APP_COMPANY_STORE_SOFTWARE_API_URL;
+
+        axios.get(companyStoreSoftwareApiUrl)
           .then(response => this.onSearchResponse(response.data))
           .catch(error => this.errors.push(error));
       },

@@ -39,12 +39,10 @@ namespace CompanySoftwareStore
             {
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                // why configure Kestrel with a HSTS policy when I'd use a reverse proxy web server in front of my ASP.NET website
-                //app.UseHsts();
+                app.UseHsts();
             }
 
-            // NOTE: I'm not sure why I would ever configure kestrel with a HTTPS CERT. I'd use a reverse proxy like NGNIX or Apache instead.
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 

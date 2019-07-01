@@ -7,7 +7,21 @@ This demonstration is implemented using ASP.NET Core 2.2 and Vue 2. ASP.NET prov
 1. Clone this solution
 2. Navigate into the project folder, "./CompanySoftwareStore/CompanySoftwareStore"
 3. Execute the website using the command "dotnet run"
+4. Open your web browser and navigate to https://localhost:5001/
+
+## Docker
+This project does not include any SSL cert. For now, it supports only HTTP when deployed through docker. If HTTPS is desired, configuring a reverse proxy service to serve this website can provide HTTPS.
+
+1. docker build -f Dockerfile.manual -t company_store:latest .
+
+2. docker run -it -p 5000:80 company_store:latest
+
+You can also specify to run the container in detached mode, of course.
+
 
 ## Troubleshooting
-The Vue JavaScript user interface does depend on having the correct URL, including the TCP port so it can consume a restful API dependency. If you enter a proper number or other semantic version value in the UI's input control and you do not see search results after pressing the "Search" button, then it is likely you will need to update the api URL value in the SPA's config.json file.
+If the user interface renders, but no results are returned despite having provided a valid semantic version number the "Search" button was pressed, you will want to make sure the URL specified in the Vue client application is correct for your hosted server environment. Please review either .env.development or .env.production.
 
+## Known Issues
+1. There is a Vue middleware error that presents when this application is run in a docker container by Visual Studio.
+2. The project's Dockerfile is not configured with any type of SSL cert to enable HTTPS by Kestrel in a container.
