@@ -28,16 +28,11 @@
         errors: []
       }
     },
-    computed: {
-      companyStoreApiUrl: function() {
-        return process.env.COMPANY_STORE_API ? process.env.COMPANY_STORE_API : config.companyStoreApiUrl;
-      }
-    },
     methods: {
       onSearchSubmit(query) {
         this.searchQuery = query;
 
-        axios.get(this.companyStoreApiUrl)
+        axios.get(config.companyStoreApiUrl)
           .then(response => this.onSearchResponse(response.data))
           .catch(error => this.errors.push(error));
       },
